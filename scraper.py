@@ -6,8 +6,13 @@ import urllib.parse
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Bright Data Scraping Browser URL with credentials
-SBR_WEBDRIVER = 'https://brd-customer-hl_cf86ef64-zone-scrappy:55mkdypjbw5r@brd.superproxy.io:9515'
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Bright Data Scraping Browser WebDriver URL (includes credentials) -- set it in .env, never commit it
+SBR_WEBDRIVER = os.getenv('SBR_WEBDRIVER')
 
 def is_valid_url(url):
     try:
@@ -19,6 +24,8 @@ def is_valid_url(url):
 def scrape_website(url):
     log = []
     try:
+        if not SBR_WEBDRIVER:
+            raise RuntimeError('SBR_WEBDRIVER is not set (see README)')
         if not is_valid_url(url):
             raise ValueError(f"Invalid URL: {url}")
 

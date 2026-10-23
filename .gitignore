@@ -1,1 +1,15 @@
+# Python virtual environments
+ai/
+venv/
+.venv/
+env/
+
+# Bytecode / caches
+__pycache__/
+*.py[cod]
+
+# Secrets
 .env
+
+
+.DS_Store
